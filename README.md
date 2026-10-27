@@ -30,3 +30,4 @@ cd ../app && npm install && npx expo start         # app dev server
 - Every change goes through a pull request and merges only when CI is green.
 - Database changes are new Flyway migrations. Never edit one that has already run.
 - Secrets come from environment variables. Never commit them; copy `.env.example` to `.env` locally.
+test
