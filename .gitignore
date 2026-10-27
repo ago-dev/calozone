@@ -1,0 +1,81 @@
+# ---------- Secrets ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.p8
+*.p12
+*.key
+*.jks
+*.keystore
+!debug.keystore
+google-services.json
+GoogleService-Info.plist
+
+# ---------- macOS ----------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# ---------- IDEs ----------
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*~
+
+# ---------- Java / Gradle ----------
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/**/build/
+*.class
+*.log
+hs_err_pid*
+replay_pid*
+bin/
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated/
+.sts4-cache/
+
+# ---------- Node ----------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.eslintcache
+*.tsbuildinfo
+coverage/
+
+# ---------- Expo / React Native ----------
+.expo/
+.expo-shared/
+dist/
+web-build/
+expo-env.d.ts
+app/ios/
+app/android/
+*.ipa
+*.apk
+*.aab
+*.orig.*
+.metro-health-check*
+
+# ---------- Local data ----------
+infra/pgdata/
+*.sqlite
+*.db
