@@ -19,7 +19,7 @@ Reading files, running read-only commands (`git status`, `git log`, `ls`, `docke
 
 | Area | Language | Framework / tools |
 |---|---|---|
-| `api/` | Java 21 | Spring Boot 3.3, Spring Security, Spring Data JPA (Hibernate), Bean Validation, Flyway, JUnit 5, Testcontainers, WireMock |
+| `api/` | Java 21 | Spring Boot 4.1, Spring Security, Spring Data JPA (Hibernate), Bean Validation, Flyway, JUnit 5, Testcontainers, WireMock |
 | Database | SQL (PostgreSQL 16) | Flyway migrations, jsonb, window functions |
 | Build | Kotlin (Gradle Kotlin DSL) | Gradle version catalog, Spotless, Error Prone, Jib |
 | `app/` | TypeScript (strict) | React Native via Expo, expo-router, expo-sqlite, EAS, Jest, Maestro |
