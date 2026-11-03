@@ -1,0 +1,5 @@
+# Automated tests. The datasource comes from the Testcontainers Postgres (roadmap 0.07),
+# so no connection settings live here.
+spring:
+  jpa:
+    show-sql: false

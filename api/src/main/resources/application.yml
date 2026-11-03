@@ -1,3 +1,7 @@
+# Settings shared by every profile. Profile files (application-<profile>.yml) override these.
 spring:
   application:
     name: calozone-api
+  jpa:
+    # Close the DB connection when the service layer finishes, not after the HTTP response is written.
+    open-in-view: false
