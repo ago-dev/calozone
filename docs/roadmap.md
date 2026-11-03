@@ -1,6 +1,6 @@
 # Calozone implementation roadmap
 
-Spring Boot 3.3 (Java 21) · PostgreSQL 16 · Expo (React Native, TypeScript)
+Spring Boot 4.1 (Java 21) · PostgreSQL 16 · Expo (React Native, TypeScript)
 
 Steps are numbered in execution order: `stage.step`. Each step assumes the ones before it are merged. One step per branch and pull request; tick the box in the same PR.
 
@@ -23,7 +23,7 @@ Branch names: `infra/…`, `db/…`, `api/…`, `app/…` followed by a short de
 
 ## Progress
 
-1 of 101 steps done.
+3 of 101 steps done.
 
 | Stage | Name | Steps |
 |---|---|---|
@@ -49,8 +49,8 @@ Module: repo · CI · local stack
 **Milestone:** Empty service deployed to staging from a merge to main
 
 - [x] **0.01** `Infra` Monorepo: api/, app/, infra/. Protect main: PR + green CI required
-- [ ] **0.02** `Infra` docker-compose: Postgres 16 (pinned tag, named volume, port 5432)
-- [ ] **0.03** `Backend` Spring Initializr: Boot 3.3, Java 21, Gradle Kotlin DSL; web, security, data-jpa, validation, actuator, flyway
+- [x] **0.02** `Infra` docker-compose: Postgres 16 (pinned tag, named volume, port 5432)
+- [x] **0.03** `Backend` Spring Initializr: Boot 4.1, Java 21, Gradle Kotlin DSL; web, security, data-jpa, validation, actuator, flyway
 - [ ] **0.04** `Backend` Gradle version catalog; Spotless + Error Prone; warnings fail the build
 - [ ] **0.05** `Backend` application.yml per profile (local, test, prod); secrets from env vars only
 - [ ] **0.06** `Database` Flyway wired; V1 = the 13-table handoff schema; ddl-auto=validate
@@ -118,7 +118,7 @@ Postgres' default port, mapped to your machine so the Spring app and tools like 
 
 docker compose up -d starts, and psql -h localhost -U calozone connects.
 
-### 0.03 — Spring Initializr: Boot 3.3, Java 21, Gradle Kotlin DSL; web, security, data-jpa, validation, actuator, flyway
+### 0.03 — Spring Initializr: Boot 4.1, Java 21, Gradle Kotlin DSL; web, security, data-jpa, validation, actuator, flyway
 
 _Backend_
 
@@ -128,7 +128,7 @@ Spring Initializr (start.spring.io, or built into IntelliJ) generates the starti
 
 **Choices**
 
-Spring Boot 3.3 — current major line; requires Java 17+.  
+Spring Boot 4.1 — current supported line (3.x is out of open-source support); requires Java 17+ and Gradle 9.  
 Java 21 — the current long-term-support release; gives records, pattern matching and virtual threads.  
 Gradle Kotlin DSL — build file written in Kotlin (build.gradle.kts), which gives autocomplete and type errors in the IDE. Maven would also work; pick one and stay.
 

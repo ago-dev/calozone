@@ -1,6 +1,6 @@
 # api
 
-Spring Boot 3.3 backend for Calozone. Java 21, Gradle (Kotlin DSL), PostgreSQL 16.
+Spring Boot 4.1 backend for Calozone. Java 21, Gradle (Kotlin DSL), PostgreSQL 16.
 
 ## Run locally
 
@@ -10,6 +10,10 @@ SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
 ```
 
 Health check: http://localhost:8080/actuator/health
+
+Until the datasource is configured (roadmap 0.05/0.06), `bootRun` stops with "Failed to configure a DataSource". That is expected.
+
+Gradle uses a Java 21 toolchain. If your default JDK is newer, Gradle finds an installed JDK 21 on its own.
 
 ## Test
 

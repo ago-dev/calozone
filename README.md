@@ -6,7 +6,7 @@ Training, sleep and food in one daily verdict: how hard to train today and how m
 
 | Folder   | What it holds |
 |----------|---------------|
-| `api/`   | Spring Boot 3 backend (Java 21, Gradle), PostgreSQL 16 via Flyway |
+| `api/`   | Spring Boot 4 backend (Java 21, Gradle), PostgreSQL 16 via Flyway |
 | `app/`   | Expo (React Native, TypeScript) mobile app for iOS and Android |
 | `infra/` | Local docker-compose, deployment config, CI helpers |
 
