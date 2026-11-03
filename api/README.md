@@ -46,6 +46,8 @@ Packaged by feature: `identity`, `program`, `training`, `verdict`, `sleep`, `fue
 
 Migrations live in `src/main/resources/db/migration`. Add a new `V<n>__description.sql`; never edit one that has run.
 
+Hibernate runs with `ddl-auto: validate`: it never changes the schema, it only checks at startup that entities match it.
+
 ## API rules
 
 - All routes are under `/v1`.

@@ -5,3 +5,6 @@ spring:
   jpa:
     # Close the DB connection when the service layer finishes, not after the HTTP response is written.
     open-in-view: false
+    # The schema comes only from Flyway; Hibernate just checks entities match it.
+    hibernate:
+      ddl-auto: validate
