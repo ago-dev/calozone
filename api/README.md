@@ -11,9 +11,19 @@ SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
 
 Health check: http://localhost:8080/actuator/health
 
-Until the datasource is configured (roadmap 0.05/0.06), `bootRun` stops with "Failed to configure a DataSource". That is expected.
+`bootRun` reads the database password from `infra/.env` (copy `infra/.env.example` first). Until migrations exist (roadmap 0.06), the app starts but has no tables.
 
 Gradle uses a Java 21 toolchain. If your default JDK is newer, Gradle finds an installed JDK 21 on its own.
+
+## Profiles
+
+| Profile | Used for | Database settings come from |
+|---|---|---|
+| `local` | Your machine | `infra/.env` (git-ignored) |
+| `test` | Automated tests | Testcontainers (0.07) |
+| `prod` | Real servers | Env vars `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` |
+
+`application.yml` holds shared defaults; `application-<profile>.yml` overrides them. Never commit a secret: config files hold placeholders like `${DB_PASSWORD}` only.
 
 ## Test
 
@@ -29,7 +39,6 @@ The build is strict on purpose:
 - **No warnings:** the compiler runs with `-Xlint:all -Werror`, so any warning fails the build.
 
 Dependency and plugin versions live in `gradle/libs.versions.toml`. Don't put version strings in `build.gradle.kts`.
-
 
 ## Structure
 

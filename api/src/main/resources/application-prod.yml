@@ -1,0 +1,7 @@
+# Real servers. Every value comes from the host's secret store as an environment variable.
+# No defaults: a missing variable stops startup instead of connecting somewhere wrong.
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}

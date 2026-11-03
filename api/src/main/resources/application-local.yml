@@ -1,0 +1,10 @@
+# Your machine: connects to the Postgres from infra/docker-compose.yml.
+spring:
+  config:
+    # Read infra/.env (git-ignored) so the DB password lives in one place on this machine.
+    # Paths are relative to api/, where ./gradlew bootRun runs.
+    import: optional:file:../infra/.env[.properties]
+  datasource:
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/${POSTGRES_DB:calozone}
+    username: ${POSTGRES_USER:calozone}
+    password: ${POSTGRES_PASSWORD}
