@@ -22,6 +22,15 @@ Gradle uses a Java 21 toolchain. If your default JDK is newer, Gradle finds an i
 ./gradlew spotlessApply   # fix formatting
 ```
 
+The build is strict on purpose:
+
+- **Formatting:** Spotless checks Java (google-java-format) and `*.gradle.kts` (ktfmt). Run `./gradlew spotlessApply` before committing; an unformatted file fails the build.
+- **Static analysis:** Error Prone runs on every compile and turns common bug patterns into errors.
+- **No warnings:** the compiler runs with `-Xlint:all -Werror`, so any warning fails the build.
+
+Dependency and plugin versions live in `gradle/libs.versions.toml`. Don't put version strings in `build.gradle.kts`.
+
+
 ## Structure
 
 Packaged by feature: `identity`, `program`, `training`, `verdict`, `sleep`, `fuel`. Each owns its controller, service, repository and DTOs.

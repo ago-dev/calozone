@@ -51,7 +51,7 @@ Module: repo · CI · local stack
 - [x] **0.01** `Infra` Monorepo: api/, app/, infra/. Protect main: PR + green CI required
 - [x] **0.02** `Infra` docker-compose: Postgres 16 (pinned tag, named volume, port 5432)
 - [x] **0.03** `Backend` Spring Initializr: Boot 4.1, Java 21, Gradle Kotlin DSL; web, security, data-jpa, validation, actuator, flyway
-- [ ] **0.04** `Backend` Gradle version catalog; Spotless + Error Prone; warnings fail the build
+- [x] **0.04** `Backend` Gradle version catalog; Spotless + Error Prone; warnings fail the build
 - [ ] **0.05** `Backend` application.yml per profile (local, test, prod); secrets from env vars only
 - [ ] **0.06** `Database` Flyway wired; V1 = the 13-table handoff schema; ddl-auto=validate
 - [ ] **0.07** `Backend` Testcontainers base class (reused container) + smoke test on /actuator/health

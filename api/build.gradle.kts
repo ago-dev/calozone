@@ -1,40 +1,52 @@
+import net.ltgt.gradle.errorprone.errorprone
+
 plugins {
-	java
-	id("org.springframework.boot") version "4.1.2"
-	id("io.spring.dependency-management") version "1.1.7"
+  java
+  alias(libs.plugins.spring.boot)
+  alias(libs.plugins.spring.dependency.management)
+  alias(libs.plugins.spotless)
+  alias(libs.plugins.errorprone)
 }
 
 group = "app.calozone"
+
 version = "0.0.1-SNAPSHOT"
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
-}
+java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
 
-repositories {
-	mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-flyway")
-	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("org.springframework.boot:spring-boot-starter-webmvc")
-	implementation("org.flywaydb:flyway-database-postgresql")
-	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
-	testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
-	testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
-	testImplementation("org.springframework.boot:spring-boot-starter-security-test")
-	testImplementation("org.springframework.boot:spring-boot-starter-validation-test")
-	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+  implementation(libs.spring.boot.starter.actuator)
+  implementation(libs.spring.boot.starter.data.jpa)
+  implementation(libs.spring.boot.starter.flyway)
+  implementation(libs.spring.boot.starter.security)
+  implementation(libs.spring.boot.starter.validation)
+  implementation(libs.spring.boot.starter.webmvc)
+  implementation(libs.flyway.database.postgresql)
+  runtimeOnly(libs.postgresql)
+
+  testImplementation(libs.spring.boot.starter.actuator.test)
+  testImplementation(libs.spring.boot.starter.data.jpa.test)
+  testImplementation(libs.spring.boot.starter.flyway.test)
+  testImplementation(libs.spring.boot.starter.security.test)
+  testImplementation(libs.spring.boot.starter.validation.test)
+  testImplementation(libs.spring.boot.starter.webmvc.test)
+  testRuntimeOnly(libs.junit.platform.launcher)
+
+  errorprone(libs.errorprone.core)
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+tasks.withType<JavaCompile>().configureEach {
+  // "processing" only reports unclaimed annotations, which Spring triggers constantly with no real
+  // meaning.
+  options.compilerArgs.addAll(listOf("-Xlint:all,-processing", "-Werror"))
+  options.errorprone.disableWarningsInGeneratedCode = true
+}
+
+tasks.withType<Test> { useJUnitPlatform() }
+
+spotless {
+  java { googleJavaFormat(libs.versions.google.java.format.get()) }
+  kotlinGradle { ktfmt() }
 }
