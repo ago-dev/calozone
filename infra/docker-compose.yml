@@ -1,0 +1,30 @@
+# Local development database. Not used in staging or production.
+# Start:  docker compose up -d        (run from infra/)
+# Stop:   docker compose down         (keeps data)
+# Wipe:   docker compose down -v      (deletes the pgdata volume)
+
+name: calozone
+
+services:
+  postgres:
+    image: postgres:16.15
+    container_name: calozone-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-calozone}
+      POSTGRES_USER: ${POSTGRES_USER:-calozone}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in infra/.env}
+      TZ: UTC
+      PGTZ: UTC
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
