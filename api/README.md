@@ -40,6 +40,12 @@ The build is strict on purpose:
 
 Dependency and plugin versions live in `gradle/libs.versions.toml`. Don't put version strings in `build.gradle.kts`.
 
+### Integration tests
+
+Tests that need the application and a database extend `IntegrationTest`. It starts one real PostgreSQL (`postgres:16.15`, same as `infra/`) in Docker for the whole test run and hands its connection to Spring via `@ServiceConnection`, under the `test` profile. Docker must be running; nothing else is needed. `HealthSmokeTest` checks that the context loads, Flyway migrates and the database answers.
+
+Test classes use constructor injection like production code: a `private final` field set by a constructor annotated with `@Autowired` (JUnit needs the annotation to let Spring resolve constructor parameters). Never `@Autowired` on fields.
+
 ## Structure
 
 Packaged by feature: `identity`, `program`, `training`, `verdict`, `sleep`, `fuel`. Each owns its controller, service, repository and DTOs.
