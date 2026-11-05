@@ -12,7 +12,12 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 @AutoConfigureMockMvc
 class HealthSmokeTest extends IntegrationTest {
 
-  @Autowired private MockMvcTester mvc;
+  private final MockMvcTester mvc;
+
+  @Autowired
+  HealthSmokeTest(MockMvcTester mvc) {
+    this.mvc = mvc;
+  }
 
   // Every endpoint requires authentication until security is configured in 1.08.
   @Test
