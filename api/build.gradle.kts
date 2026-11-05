@@ -23,6 +23,9 @@ dependencies {
   implementation(libs.spring.boot.starter.security)
   implementation(libs.spring.boot.starter.validation)
   implementation(libs.spring.boot.starter.webmvc)
+  testImplementation(libs.spring.boot.testcontainers)
+  testImplementation(libs.testcontainers.postgresql)
+
   implementation(libs.flyway.database.postgresql)
   runtimeOnly(libs.postgresql)
 

@@ -52,9 +52,9 @@ Module: repo · CI · local stack
 - [x] **0.02** `Infra` docker-compose: Postgres 16 (pinned tag, named volume, port 5432)
 - [x] **0.03** `Backend` Spring Initializr: Boot 4.1, Java 21, Gradle Kotlin DSL; web, security, data-jpa, validation, actuator, flyway
 - [x] **0.04** `Backend` Gradle version catalog; Spotless + Error Prone; warnings fail the build
-- [ ] **0.05** `Backend` application.yml per profile (local, test, prod); secrets from env vars only
-- [ ] **0.06** `Database` Flyway wired; V1 = the 13-table handoff schema; ddl-auto=validate
-- [ ] **0.07** `Backend` Testcontainers base class (reused container) + smoke test on /actuator/health
+- [x] **0.05** `Backend` application.yml per profile (local, test, prod); secrets from env vars only
+- [x] **0.06** `Database` Flyway wired; V1 = the 13-table handoff schema; ddl-auto=validate
+- [x] **0.07** `Backend` Testcontainers base class (reused container) + smoke test on /actuator/health
 - [ ] **0.08** `Infra` GitHub Actions: build, test, Jib image push on main
 - [ ] **0.09** `Infra` Dependabot for Gradle, npm and Actions; CodeQL scan on PRs
 - [ ] **0.10** `Infra` Staging host + managed Postgres in an EU region; deploy the empty service
@@ -881,11 +881,15 @@ _Backend_
 
 **What**
 
-List and search exercises for the program builder, plus let a user create their own (custom = true, user_id set).
+List and search exercises for the program builder, plus let a user create their own (owner_id set; catalogue exercises have owner_id null).
 
 **Search**
 
 WHERE lower(name) LIKE lower(:q) || '%' is enough at this size. Return catalogue + the caller's own custom exercises, never other users'.
+
+**Before allowing exercise deletion**
+
+V1 has program_exercises.exercise_id and set_logs.exercise_id as ON DELETE CASCADE, so deleting an exercise would silently erase every set logged with it (for a catalogue exercise, every user's). Switch both to ON DELETE NO ACTION in a new migration before any endpoint can delete an exercise. Use NO ACTION, not RESTRICT: NO ACTION is checked at the end of the statement, so erasing a user still works (the users cascade removes their sets and custom exercises together), while RESTRICT is checked immediately and could block it depending on cascade order.
 
 **Done when**
 

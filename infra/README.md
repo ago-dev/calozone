@@ -18,6 +18,8 @@ docker compose down -v      # stop and wipe data
 
 Connect: `psql -h localhost -U calozone calozone`
 
+Credentials live in `infra/.env` (git-ignored; copy `.env.example`). The API's `local` profile reads the same file, so the password is set in one place.
+
 ## Environments
 
 | Name    | Purpose                       | Region |
